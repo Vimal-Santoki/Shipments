@@ -1,0 +1,33 @@
+﻿@{
+    Layout = null;// "/Views/Shared/_ShipmentsLayout.cshtml";
+    // ViewBag.Title = "Shipments";
+}
+<div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-url='@Url.Action("Register", "Account")'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;</button>
+                <h4 class="modal-title" id="H1">
+                    Upload SKUs</h4>
+            </div>
+            @using (Html.BeginForm("UploadFile", "SKU", FormMethod.Post, new { @enctype = "multipart/form-data", @roll = "form", @ID = "frmSKUUpload" }))
+            {
+                
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="SKUFile" class="control-label">
+                            Select SKU File</label>
+                        <input type="file" name="SKUFile" id="SKUFile" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" value="Download" class="btn btn-primary" onclick="SubmitMe('/SKU/GetUploadFormat/','frmSKUUpload')">
+                        <i class="glyphicon glyphicon-download"></i>Download Format</button>
+                    <button type="button" value="Upload" class="btn btn-primary" onclick="SubmitMe('/SKU/UploadFile/','frmSKUUpload')">
+                        <i class="glyphicon glyphicon-upload"></i>Upload</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

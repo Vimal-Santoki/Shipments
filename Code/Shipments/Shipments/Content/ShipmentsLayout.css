@@ -1,0 +1,92 @@
+﻿body
+{
+    padding:0px !important;
+    margin:0px !important;
+    font-family:"Droid Sans W02 Regular",Verdana,Geneva,sans-serif;
+    font-size:16px;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: #fff !important;
+}
+.navbar-inverse {
+    background-color: #1A8995 !important;
+    border-color: #080808;
+}
+.navbar-inverse .navbar-brand {
+    color: #fff !important;
+}
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .active > a:hover {
+    background-color: #379Da9 !important;
+    color: #fff;
+}
+.RemovePadding
+{
+    padding-left:0px !important;
+    padding-right:0px !important;
+}
+.navbar {
+    margin-bottom: 5px !important;
+}
+.navbar-nav {
+    margin: 0px !important;
+}
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover {
+    background-color: #2F4F4F !important;
+    color: #fff;
+}
+.dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {
+    background-color: #379Da9 !important;
+    color: #fff;
+    text-decoration: none;
+}
+.PageName
+{
+    font-weight:bold;
+    font-size:24px;
+    text-shadow:none;
+}
+.MarginTopBottom5px
+{
+    margin-bottom:5px !important;
+    margin-top:5px !important;
+}
+table.table tr:nth-child(2n)
+{
+    background-color:#f2f2f2;
+}
+table.table th
+{
+    background-color:#f2f2f2;
+}
+table.table tr
+{
+    height:20px !important;
+}
+table.table td,table.table th
+{
+    padding:5px !important;
+    vertical-align:middle !important;
+}
+table.table
+{
+    border:1px solid #ddd;
+}
+.glyphicon
+{
+    margin-right:5px !important;
+}
+.btn.btn-red-delete {
+    color: #bd362f;
+}
+.model-dialog-search
+{
+     width: 225px !important;
+}
+.model-header-search
+{
+    padding: 5px 0 0 15px !important;
+}
+.btn-search-margin-top20
+{
+    margin-top:20px;
+}

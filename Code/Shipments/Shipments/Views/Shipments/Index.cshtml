@@ -1,0 +1,188 @@
+﻿@model List<Shipments.Models.Brand>
+@{
+    Layout = "/Views/Shared/_ShipmentsLayout.cshtml";
+    ViewBag.Title = "Shipments";
+}
+@section _PageName{
+    @ViewBag.Title
+}
+@using (Html.BeginForm("Filter", "Shipments", FormMethod.Post, new { @id = "frmIndex" }))
+{
+    <div class="row-fluid">
+        <div class="col-xs-5 col-sm-5 col-md-8 col-lg-8 RemovePadding MarginTopBottom5px">
+            <button id="btnNewShipments" class="btn btn-success" type="button" onclick="location.href='@Url.Content("~/Shipments/Add")'">
+                <i class="new-record"></i>New Shipment</button>
+        </div>
+        <div class="col-xs-7 col-sm-7 col-md-4 col-lg-4 RemovePadding MarginTopBottom5px">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                    More <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                    <li role="presentation" onclick="SubmitMe('/Shipments/Download/?IsFiltered=false','frmIndex')">
+                        <a role="menuitem" tabindex="-1" href="#">Download All Records</a></li>
+                    <li role="presentation" onclick="SubmitMe('/Shipments/Download/?IsFiltered=true','frmIndex')">
+                        <a role="menuitem" tabindex="-1" href="#">Download Filtered Records</a></li>
+                    <li role="presentation" onclick="OpenUploadModel('/Shipments/Upload')"><a role="menuitem"
+                        tabindex="-1" href="#">Upload</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 RemovePadding">
+        <table class="table table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th>
+                    </th>
+                    <th>
+                        Brand
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="txtBrand" name="Brand" />
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                        </div>
+                    </th>
+                    <th>
+                        SKU
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="txtSKU" name="SKU" />
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                        </div>
+                    </th>
+                    <th>
+                        <button type="button" class="btn btn-primary btn-search-margin-top20" onclick="SubmitMe('/Shipments/Filter/','frmIndex')">
+                            <i class="glyphicon glyphicon-search"></i>Search</button>
+                    </th>
+                    <th>
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int b = 0; b < @Model.Count; b++)
+                {
+                    <tr class="clickable" data-toggle="collapse" id="row-@b" data-target=".row-a-@b">
+                        <td>
+                            <i class="glyphicon glyphicon-plus"></i>
+                        </td>
+                        <td colspan="5">@Model[b].Name
+                        </td>
+                    </tr>
+                    <tr class="collapse row-a-@b">
+                        <td>
+                        </td>
+                        <td colspan="5">
+                            <table class="table table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                        </th>
+                                        <th>
+                                            SKU
+                                        </th>
+                                        <th>
+                                            Total Shipped
+                                        </th>
+                                        <th>
+                                            Total Investment
+                                        </th>
+                                        <th>
+                                            Our Cost
+                                        </th>
+                                    </tr>
+                                </thead>
+                                @for (int i = 0; i < @Model[b].ShipmentSummaryDetails.Count; i++)
+                                {
+                                    <tr class="clickable" data-toggle="collapse" id="row-@b-@i" data-target=".row-@b-@i">
+                                        <td>
+                                            <i class="glyphicon glyphicon-plus"></i>
+                                        </td>
+                                        <td>
+                                            @Model[b].ShipmentSummaryDetails[i].SKU
+                                        </td>
+                                        <td>
+                                            @Model[b].ShipmentSummaryDetails[i].ShipmentCount
+                                        </td>
+                                        <td>
+                                            @Model[b].ShipmentSummaryDetails[i].ShipmentAmount
+                                        </td>
+                                        <td>
+                                            @Model[b].ShipmentSummaryDetails[i].PerShipmentCost
+                                        </td>
+                                    </tr>
+                                    <tr class="collapse row-@b-@i">
+                                        <td>
+                                        </td>
+                                        <td colspan="4">
+                                            <table class="table table-responsive">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            Shipment ID
+                                                        </th>
+                                                        <th>
+                                                            Shipment Date
+                                                        </th>
+                                                        <th>
+                                                            Received Date at FBA
+                                                        </th>
+                                                        <th>
+                                                            Quantity
+                                                        </th>
+                                                        <th>
+                                                            Item Cost
+                                                        </th>
+                                                        <th>
+                                                            Total Our Cost
+                                                        </th>
+                                                        <th>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @for (int j = 0; j < @Model[b].ShipmentSummaryDetails[i].ShipmentDetails.Count; j++)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @Model[b].ShipmentSummaryDetails[i].ShipmentDetails[j].ShipmentID
+                                                            </td>
+                                                            <td>
+                                                                @Model[b].ShipmentSummaryDetails[i].ShipmentDetails[j].ShipmentDate
+                                                            </td>
+                                                            <td>
+                                                                @Model[b].ShipmentSummaryDetails[i].ShipmentDetails[j].FBAReceivedDate
+                                                            </td>
+                                                            <td>
+                                                                @Model[b].ShipmentSummaryDetails[i].ShipmentDetails[j].Quantity
+                                                            </td>
+                                                            <td>
+                                                                @Model[b].ShipmentSummaryDetails[i].ShipmentDetails[j].ShipmentCost
+                                                            </td>
+                                                            <td>
+                                                                @Model[b].ShipmentSummaryDetails[i].ShipmentDetails[j].TotalCost
+                                                            </td>
+                                                            <td>
+                                                                <button onclick="return Edit(@Model[b].ShipmentSummaryDetails[i].ShipmentDetails[j].ID,'/Shipments/EditShipment','/Shipments/Edit');" class="btn btn-default" type="button">
+                                                                    <i class="glyphicon glyphicon-pencil" style="margin-right: 0px !important"></i>
+                                                                </button>
+                                                                &nbsp;
+                                                                <button onclick="return Delete(@Model[b].ShipmentSummaryDetails[i].ShipmentDetails[j].ID,'/Shipments/Delete','/Shipments/index','Shipment');" class="btn btn-default btn-red-delete" type="button">
+                                                                    <i class="glyphicon glyphicon-trash" style="margin-right: 0px !important"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

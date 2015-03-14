@@ -1,0 +1,32 @@
+﻿@model Shipments.Models.SKUs
+@{
+    Layout = "/Views/Shared/_ShipmentsLayout.cshtml";
+    ViewBag.Title = "Add SKU";
+}
+@section _PageName{
+    @ViewBag.Title
+}
+@using (Html.BeginForm("Save", "SKU", FormMethod.Post, new { @roll = "form" }))
+{
+    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4 RemovePadding">
+        <div class="form-group">
+            <label for="email">
+                Brand:</label>
+            @Html.DropDownListFor(model => model.BrandID, Model.Brands, "Choose... ", new { @placeholder = "Enter Brand", @name = "BrandID", @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="email">
+                SKU:</label>
+            <input type="text" name="SKU" class="form-control" id="SKU" placeholder="Enter SKU" />
+        </div>
+        <div class="form-group">
+            <label for="email">
+                Price:</label>
+            <input type="text" name="Price" class="form-control" id="Price" placeholder="Enter Price" />
+        </div>
+        <button type="submit" class="btn btn-primary">
+            <i class="glyphicon glyphicon-ok"></i>Save</button>
+        <button type="button" class="btn btn-default" onclick="location.href='@Url.Content("~/Brands")'">
+            Cancel</button>
+    </div>
+}

@@ -1,0 +1,108 @@
+﻿@model List<Shipments.Models.Users>
+@{
+    ViewBag.Title = "Users";
+}
+@section _PageName{
+    @ViewBag.Title
+}
+@using (Html.BeginForm("Filter", "Users", FormMethod.Post, new { @id = "frmUserIndex" }))
+{
+    <div class="row-fluid">
+        <div class="col-xs-5 col-sm-5 col-md-8 col-lg-8 RemovePadding MarginTopBottom5px">
+            <button id="btnNewUser" class="btn btn-success" type="button" onclick="location.href='@Url.Content("~/Users/Add")'">
+                <i class="new-record"></i>New User</button>
+        </div>
+        <div class="col-xs-7 col-sm-7 col-md-4 col-lg-4 RemovePadding MarginTopBottom5px">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                    More <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                    <li role="presentation" onclick="SubmitMe('/Users/Download/?IsFiltered=false','frmUserIndex')">
+                        <a role="menuitem" tabindex="-1" href="#">Download All Records</a></li>
+                    <li role="presentation" onclick="SubmitMe('/Users/Download/?IsFiltered=true','frmUserIndex')">
+                        <a role="menuitem" tabindex="-1" href="#">Download Filtered Records</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid ">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 RemovePadding">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                User
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="txtUser" name="Name" />
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                User Name
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="txtUserName" name="UserName" />
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                Email ID
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="txtEmailID" name="Email" />
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                                </div>
+                            </th>
+                            <th>
+                                Contact#
+                            </th>
+                            <th>
+                                Is Admin
+                            </th>
+                            <th>
+                                <button type="button" class="btn btn-primary btn-search-margin-top20" onclick="SubmitMe('/Users/Filter/','frmUserIndex')">
+                                    <i class="glyphicon glyphicon-search"></i>Search</button>
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbdForSearch">
+                        @for (int i = 0; i < Model.Count(); i++)
+                        {
+                            <tr>
+                                <td>@Model[i].Name
+                                </td>
+                                <td>@Model[i].UserName
+                                </td>
+                                <td>@Model[i].Email
+                                </td>
+                                <td>@Model[i].ContactNo
+                                </td>
+                                <td>@Model[i].IsAdmin
+                                </td>
+                                <td>
+                                    <button onclick="return Edit(@Model[i].ID,'/Users/EditUser','/Users/Edit');" class="btn btn-default" type="button" data-toggle="tooltip" data-placement="top" title="Edit User">
+                                        <i class="glyphicon glyphicon-pencil" style="margin-right: 0px !important"></i>
+                                    </button>
+                                    &nbsp;
+                                    <button onclick="return Permissions(@Model[i].ID,'/Users/EditBrand','/Users/Index');" class="btn btn-default" type="button" data-toggle="tooltip" data-placement="top" title="Add/Edit Permissions">
+                                        <i class="glyphicon glyphicon-lock" style="margin-right: 0px !important"></i>
+                                    </button>
+                                    &nbsp;
+                                    <button onclick="return ResetPassword(@Model[i].ID,'/Users/EditBrand','/Users/Index');" class="btn btn-default" type="button"data-toggle="tooltip" data-placement="top" title="Reset Password">
+                                        <i class="glyphicon glyphicon-retweet" style="margin-right: 0px !important"></i>
+                                    </button>
+                                    &nbsp;
+                                    <button onclick="return Delete(@Model[i].ID,'/Users/Delete','/Users/Index','Users');" class="btn btn-default btn-red-delete" type="button" data-toggle="tooltip" data-placement="top" title="Delete This User">
+                                        <i class="glyphicon glyphicon-trash" style="margin-right: 0px !important"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}

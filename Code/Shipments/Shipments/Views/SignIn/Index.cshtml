@@ -1,0 +1,65 @@
+﻿@{
+    Layout = null;// "/Views/Shared/_ShipmentsLayout.cshtml";
+    ViewBag.Title = "Sign In";
+
+}
+@Styles.Render("~/Scripts/bootstrap/css/bootstrap.min.css")
+@Styles.Render("~/Scripts/bootstrap/css/bootstrap-responsive.min.css")
+@Styles.Render("~/Content/ShipmentsLayout.css")
+<script src="@Url.Content("~/scripts/jquery-2.1.3.min.js")"></script>
+<script src="@Url.Content("~/scripts/bootstrap/js/bootstrap.min.js")"></script>
+<style>.panel-default {
+ opacity: 0.9;
+ margin-top:30px;
+}
+.form-group.last {
+ margin-bottom:0px;
+}</style>
+
+<div class="row">
+    <div class="col-md-5 col-md-offset-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong class="">Login</strong>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" role="form" action="/SignIn/LogIn" method="post">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-3 control-label">
+                        User Name</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" id="UserName" name="UserName" placeholder="User Name" required="" type="text">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-3 control-label">
+                        Password</label>
+                    <div class="col-sm-9">
+                        <input class="form-control" id="Password" name="Password" placeholder="Password" required=""
+                            type="password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <div class="checkbox">
+                            <label class="">
+                                <input class="" type="checkbox">Remember me</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group last">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <button type="submit" class="btn btn-success btn-sm">
+                            Sign in</button>
+                        <button type="reset" class="btn btn-default btn-sm">
+                            Reset</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <div class="panel-footer">
+                Not Registered? <a href="#" class="">Register here</a>
+            </div>
+        </div>
+    </div>
+</div>

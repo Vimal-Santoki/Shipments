@@ -1,0 +1,84 @@
+﻿@model List<Shipments.Models.Brand>
+@{
+    Layout = "/Views/Shared/_ShipmentsLayout.cshtml";
+    ViewBag.Title = "Brands";
+}
+@section _PageName{
+    @ViewBag.Title
+}
+@using (Html.BeginForm("Filter", "Brand", FormMethod.Post, new { @id = "frmBrandIndex" }))
+{
+<div class="row-fluid">
+    <div class="col-xs-5 col-sm-5 col-md-8 col-lg-8 RemovePadding MarginTopBottom5px">
+        <button id="btnNewBrands" class="btn btn-success" type="button" onclick="location.href='@Url.Content("~/Brand/Add")'">
+            <i class="new-record"></i>New Brands</button>
+    </div>
+    <div class="col-xs-7 col-sm-7 col-md-4 col-lg-4 RemovePadding MarginTopBottom5px">
+        <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                More <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                <li role="presentation" onclick="SubmitMe('/Brand/Download/?IsFiltered=false','frmBrandIndex')">
+                    <a role="menuitem" tabindex="-1" href="#">Download All Records</a></li>
+                <li role="presentation" onclick="SubmitMe('/Brand/Download/?IsFiltered=true','frmBrandIndex')">
+                    <a role="menuitem" tabindex="-1" href="#">Download Filtered Records</a></li>
+                <li role="presentation" onclick="OpenUploadModel('/Brand/Upload')"><a role="menuitem"
+                    tabindex="-1" href="#">Upload</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row-fluid ">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 RemovePadding">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Brand
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="txtBrand" name="Name" />
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                            </div>
+                        </th>
+                        <th>
+                            Manufacturer
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="txtManufacturer" name="Manufacturer" />
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                            </div>
+                        </th>
+                        <th>
+                        <button type="button" class="btn btn-primary btn-search-margin-top20" onclick="SubmitMe('/Brand/Filter/','frmBrandIndex')">
+                            <i class="glyphicon glyphicon-search"></i>Search</button>
+                    </th>
+                        <th>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="tbdForSearch">
+                    @for (int i = 0; i < Model.Count(); i++)
+                    {
+                        <tr>
+                            <td>@Model[i].Name
+                            </td>
+                            <td>@Model[i].Manufacturer
+                            </td>
+                            <td>
+                                <button onclick="return Edit(@Model[i].ID,'/Brand/EditBrand','/Brand/Edit');" class="btn btn-default" type="button">
+                                    <i class="glyphicon glyphicon-pencil" style="margin-right: 0px !important"></i>
+                                </button>
+                                &nbsp;
+                                <button onclick="return Delete(@Model[i].ID,'/Brand/Delete','/Brand/Index','Brand');" class="btn btn-default btn-red-delete" type="button">
+                                    <i class="glyphicon glyphicon-trash" style="margin-right: 0px !important"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+}

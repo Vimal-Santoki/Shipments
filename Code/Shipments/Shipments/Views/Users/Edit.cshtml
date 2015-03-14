@@ -1,0 +1,43 @@
+﻿@model Shipments.Models.Users
+@{
+    ViewBag.Title = "Edit User";
+}
+@section _PageName{
+    @ViewBag.Title
+}
+@using (Html.BeginForm("Save", "Users", FormMethod.Post, new { @roll = "form" }))
+{
+    
+    @Html.HiddenFor(x => x.ID)
+    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4 RemovePadding">
+        <div class="form-group">
+            <label for="email">
+                Name:</label>
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @placeholder = "Enter Name" })
+        </div>
+        <div class="form-group">
+            <label for="pwd">
+                User Name:</label>
+            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control", @placeholder = "Enter User Name" })
+        </div>
+        <div class="form-group">
+            <label for="pwd">
+                Email:</label>
+            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @placeholder = "Enter Email" })
+        </div>
+        <div class="form-group">
+            <label for="pwd">
+                Contact#:</label>
+            @Html.TextBoxFor(x => x.ContactNo, new { @class = "form-control", @placeholder = "Enter Contact Number" })
+        </div>
+        <div class="form-group">
+            <label>
+                @Html.CheckBoxFor(x => x.IsAdmin,@Model.IsAdmin) Is Admin</label>
+            
+        </div>
+        <button type="submit" class="btn btn-primary">
+            <i class="glyphicon glyphicon-ok"></i>Save</button>
+        <button type="button" class="btn btn-default" onclick="location.href='@Url.Content("~/Users/")'">
+            Cancel</button>
+    </div>
+}

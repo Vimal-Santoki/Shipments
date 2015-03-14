@@ -1,0 +1,28 @@
+﻿@model Shipments.Models.Brand
+@{
+    Layout = "/Views/Shared/_ShipmentsLayout.cshtml";
+    ViewBag.Title = "Edit Brand";
+}
+
+@section _PageName{
+    @ViewBag.Title
+}
+@using (Html.BeginForm("Save", "Brand", FormMethod.Post, new { @roll = "form" }))
+{
+    
+    @Html.HiddenFor(x=>x.ID)
+    <div  class="col-xs-12 col-sm-12 col-md-5 col-lg-4 RemovePadding">
+    <div class="form-group">
+      <label for="email">Brand:</label>
+      @Html.TextBoxFor(x=>x.Name,new{@class="form-control",@placeholder="Enter Brand"})
+    </div>
+    <div class="form-group">
+      <label for="pwd">Manufacturer:</label>
+      @Html.TextBoxFor(x=>x.Manufacturer,new{@class="form-control",@placeholder="Enter Manufacturer"})
+      
+    </div>
+   
+    <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i>Save</button>
+     <button type="button" class="btn btn-default" onclick="location.href='@Url.Content("~/Brand/")'">Cancel</button>
+    </div>
+}
